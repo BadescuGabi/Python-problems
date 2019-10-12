@@ -28,6 +28,7 @@ Aria_placa=(L2*L2)
 print("Latura placii de gresie este: ", L2,end=" ")
 Nrplaci=Aria_pardoseala//Aria_placa
 print( " numarul placilor de gresie este de : ",Nrplaci)
+PROBLEMA 2
 '''
 '''
 x = int(input("x= "))
@@ -41,7 +42,7 @@ for i in range(m):
     if (i + 1) % 10 == 0:
       x =x-p/100*x
 print("distanta parcursa este:  ", distanta)
-3
+PROBLEMA 3
 '''
 '''
 n=int(input("n="))
@@ -56,7 +57,7 @@ for i in range(n-1):
         zi=i+1
     z1=z2
 print("cea mai mare crestere a fost de",difmax," RON","intre zilele ",zi," si ",zi+1)
-4
+PROBLEMA 4
 '''
 '''
 n=int(input("n= "))
@@ -73,7 +74,7 @@ if (val1 or val2) :
     print("IMPOSIBIL")
 else:
     print("cele mai mari doua numere distincte din sir sunt: ",val1,val2)
-5
+PROBLEMA 5
 '''
 '''
 n=int(input("n= "))
@@ -98,5 +99,6 @@ for i in range(10):
             copie//=10
     copie=n
 print("numarul min este: ",nrmin)  #pentru numar minim
+PROBLEMA 6
 '''
 
