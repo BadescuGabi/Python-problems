@@ -1,0 +1,384 @@
+"""
+sir1=input("sir gresit: ")
+sir2=input("sir corect: ")
+sir3=""
+sir4=""
+ok=0
+for i in range(len(sir1)):
+    if ok:
+        print("greseala este: ",sir3)
+        print("corect este: ",sir4)
+        exit()
+    while sir1[i]!=sir2[i]:
+        sir3+=sir1[i]
+        sir4+=sir2[i]
+        ok=1
+        i+=1
+        1
+"""
+
+
+"""
+sir=input()
+sir=sir.title()
+print(sir)
+2
+"""
+
+
+"""
+sir=input()
+sir2=""
+s=input("cuvantul care va fi inlocuit:")
+t=input("cu cuvantul: ")
+sir=sir.split()
+for x in sir:
+    if x==s:
+        sir2+=t
+        sir2+=" "
+    else:
+        sir2+=x
+        sir2+=" "
+print(sir2)
+3
+"""
+
+
+"""
+sir1=input()
+sir2=input()
+sir3=""
+nr=0
+if len(sir1)!=len(sir2):
+    print("nu sunt anagrame")
+for i in range(len(sir1)):
+    for j in range (len(sir2)):
+        if sir1[i]==sir2[j]:
+            sir2= sir2.replace(sir2[j],"",1)
+            nr+=1
+            break
+if(nr==len(sir1)):
+    print("sunt anagrame")
+else:
+    print("nu sunt anagrame")
+    4
+ """
+
+
+"""
+k=int(input())
+#e indice k(x)=(x+k)%26
+#cripteaza x folosind cheia k
+#d indice k(x)=(x-k)%26
+#se fol ord si chr
+e=0
+d=0
+criptare=input("vrei sa criptezi?")
+decriptare=input("vrei sa decriptezi")
+if(criptare=="Da"):
+    sir=input()
+    for i in range(len(sir)):
+
+     if ord(sir[i])>=ord("a") and ord(sir[i])<=ord("z"):
+              e = chr((ord(sir[i]) - ord("a") + k) % 26 + ord("a"))
+              print(e,end="")
+              e=0
+     if ord(sir[i])>=ord("A") and ord(sir[i])<=ord("Z"):
+            e = chr((ord(sir[i])-ord("A")+k)%26+ord("A"))
+            print(e,end="")
+            e=0
+if(decriptare=="Da"):
+    sir=input()
+    for i in range (len(sir)):
+        if ord(sir[i]) >= ord("a") and ord(sir[i]) <= ord("z"):
+            d = chr((ord(sir[i]) - ord("a") - k) % 26 + ord("a"))
+            print(d, end="")
+            d = 0
+        if ord(sir[i]) >= ord("A") and ord(sir[i]) <= ord("Z"):
+            d = chr((ord(sir[i]) - ord("A") - k) % 26 + ord("A"))
+            print(d, end="")
+            d = 0
+5
+"""
+
+
+"""
+suma_totala=0
+suma=0
+nrcifre=0
+fraza=input()
+x=-1
+while x<(len(fraza)-1):
+     #print(x)
+     x+=1
+     while ord(fraza[x])>=ord("0") and ord(fraza[x])<=ord("9") and x<len(fraza)-1:
+        suma=suma*10+ord(fraza[x])-ord("0")
+        x+=1
+        nrcifre += 1
+       # print(x)
+        if(fraza[x].isnumeric()==0):
+            #print(suma)
+            suma_totala += suma
+            suma=0
+            x+=nrcifre
+            nrcifre=0
+
+print(suma_totala)
+#6 dar are o hiba, daca am un numar si se termina imediat propozitia, va da eroare de range
+#astfel dupa fiecare numar tastat , va trebui sa am un anumit numar de caractere care sa nu fie numere 
+#NU STIU DE CE!!!
+"""
+
+
+"""
+zilele_saptamanii={
+    1:"Luni",
+    2:"Marti",
+    3:"Miercuri",
+    4:"Joi",
+    5:"Vineri",
+    6:"Sambata",
+    0:"Duminica"
+}
+lunile_anului={
+    1:"Ianuarie",
+    2:"Februarie",
+    3:"Martie",
+    4:"Aprilie",
+    5:"Mai",
+    6:"Iunie",
+    7:"Iulie",
+    8:"August",
+    9:"Septembrie",
+    10:"Octombrie",
+    11:"Noiembrie",
+    12:"Decembrie"
+}
+zile_luna={
+    1:31,
+    2:28,
+    3:31,
+    4:30,
+    5:31,
+    6:30,
+    7:31,
+    8:31,
+    9:30,
+    10:31,
+    11:30,
+    12:31
+}
+ziua=int(input())
+luna=int(input())
+anul=int(input())
+print("prima data: ",end=" ")
+print(ziua,end="-")
+print(lunile_anului.get(luna),end="-")
+print(anul,end="--")
+print(zilele_saptamanii.get(ziua%7)) #magarie ,merge pentru ca vreau eu sa aleg 1 ianuarie 1923 si pica lunea
+ziua2=int(input())
+luna2=int(input())
+anul2=int(input())
+print("Data aleasa este: ",end="")
+print(ziua2,end="-")
+print(lunile_anului.get(luna2),end="-")
+print(anul2)
+#iau data de afisare 28 octombrie 1986 si pica marti
+anibis=0
+for i in range(anul,anul2+1):
+    if i%400==0:
+        anibis+=1
+    elif i%4==0 and i%100!=0:
+        anibis+=1
+nrzile=0
+for i in range(1,luna2):
+     nrzile+=zile_luna[i]
+nrzile+=ziua2
+nrzile+=(anul2-anul)*365+anibis
+if nrzile%7==1:
+        print(zilele_saptamanii.get(1))
+if nrzile%7==2:
+        print(zilele_saptamanii.get(2))
+if nrzile%7==3:
+        print(zilele_saptamanii.get(3))
+if nrzile%7==4:
+        print(zilele_saptamanii.get(4))
+if nrzile%7==5:
+        print(zilele_saptamanii.get(5))
+if nrzile%7==6:
+        print(zilele_saptamanii.get(6))
+if nrzile%7==0:
+        print(zilele_saptamanii.get(0))
+print(nrzile)
+#problema an bisect, citesc o data din tastatura, cu an,luna,zi sapt iar apoi citesc alta.problema vrea sa aflu numarul de zile dintre ceo 2 ani si sa zic in ce zi pica a 2 a data aleasa
+#7
+"""
+
+
+"""
+sir=input()
+sir=sir.replace("a","apa")
+sir=sir.replace("e","epe")
+sir=sir.replace("i","ipi")
+sir=sir.replace("o","opo")
+sir=sir.replace("u","upu")
+print(sir)
+#sub a, iar pentru a traduce din pasareasca, doar inversam in replace
+
+
+import re
+sir=input()
+sir2=""
+sir=sir.split()
+i=0
+ok=0
+for x in sir:
+    i=0
+    while i<len(x):
+
+        if x[i]=="-":
+            sir2+= "p" + x[x.find("-",i,len(x))-1]
+            sir2+="-"
+        else:
+            sir2+=x[i]
+        if i==len(x)-1 and x[len(x)-1].islower():
+            sir2+="p"+x[i]
+            sir2+=" "
+        i+=1
+print(sir2)
+#sub b PROBLEMA 8
+"""
+
+
+"""
+sir=input()
+sir=sir.split("$")
+i=0
+nr=1
+ok=0
+for x in sir:
+    if(nr==2):
+        break
+    print()
+    if ok==1:
+        nr+=1
+    ok=0
+    for i in range(len(x)):
+        while ord(x[i])>=ord("0") and ord(x[i])<=ord("9"):
+            print(x[i],end="")
+            ok=1
+            break
+#sub a
+            
+sir=input()
+sir=sir.split("$")
+i=0
+nr=0
+a=b=0
+ok=0
+print(sir)
+for x in sir[len(sir)-2:len(sir)]:
+    nr=0
+    i=0
+    ok+=1
+    while i<len(x)-1:
+        while ord(x[i])>=ord("0") and ord(x[i])<=ord("9"):
+            nr=nr*10+ord(x[i])-ord("0")
+            i+=1
+        if i<len(x)-1:
+            i+=1
+        if ok==1:
+            a=nr
+        if ok==2:
+            b=nr
+if(a==b):
+    print("s-au inteles")
+else:
+    print("nu s-au inteles")
+#sub b, in for m am dus direct la ultimele elemente ale listei si am creat numerele apoi am verificat daca sunt egale
+#trebuie mereu ca dupa fiecare numar gen $60 sa mai fie un caracter sa nu dea eroare de range
+#PROBLEMA 9!
+"""
+
+
+"""
+sir=input()
+import re
+sir2=sir
+sir2=re.split("-| ",sir2)
+for x in sir2:
+    for i in range(len(x)):
+        if x[0].isupper():
+            continue
+        else:
+            print("nu e nume/prenume")
+            exit()
+#verifica daca fiecare nume/prenume incepe cu litera mare
+#puteam sa folosesc functia istitle in loc de import si resplit dar am vazut dupa
+#OBSERVATIE!!!!!!!!!!!! Trebuia functia is title, deoarece putem avea litere mari in nume si astfle va rula
+#de aceea NU MERGE CU RESPLIUT!!!!! Insa il las asa ca sa il mai vad
+nr=0
+sir=sir.split()
+
+for x in sir:
+    for i in range(len(x)):
+          if x[i]=='-':
+                nr+=1
+if nr>1:
+    print ("nu e nume-prenume")
+if nr==1 and len(sir)!=2:
+    print("nu-e-nume-prenume")
+    exit()
+#verific sa aiba maxim o cratima
+#verific si cazul in care are o cratima , numarul de cuvinte sa fie 3
+
+for x in sir:
+    if len(x)<3:
+          print("nu e nume prenume")
+          exit()
+#verific daca fiecare nume/prenume are minim 3 litere
+10
+"""
+
+
+'''
+sir=input()
+sir=sir.split(". ")
+i=-1
+
+for x in sir:
+    i+=1
+    if x[0].islower() and i<len(sir):
+        sir[i-1]+=" "
+        sir[i-1]+=sir[i]
+        for i in range(i,len(sir)-1):
+            sir[i]=sir[i+1]
+
+print(sir)
+11
+'''
+
+
+"""
+sir1=input()
+sir2=""
+op1=""
+op2=""
+lit=""
+for i in range(len(sir1)):
+    sir2+=sir1[len(sir1)-1-i]
+#am construit oglinditul lui sir1 in sir2
+if sir1[len(sir1)-1]==sir2[0]:
+    i=0
+    lit=sir2[0]
+    while sir2[i]==lit:
+        sir2=sir2.replace(sir2[i],"")
+        i+=1
+    sir1=sir1.replace(sir1[len(sir1)-1],"",1)
+op1+=sir1+sir2
+print(len(op1))
+if sir1[len(sir1)-1]!=sir2[0]:
+    op2+=sir1+sir2
+print(len(op2))
+#PROBLEMA 12 DE RAVAZUT !!!!!!!!!!!!!!!!!1
+"""
