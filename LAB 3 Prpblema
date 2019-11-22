@@ -1,0 +1,593 @@
+"""
+import random
+f=open("ddd.txt","r")
+g=open("ccc.txt","w")
+sir=f.read()
+i=-1
+sir=sir.lower()
+sir=sir.split()
+nume=""
+prenume=''
+z=0
+for x in sir:
+    i+=1
+    if i%2==0:
+        nume=x
+    else:
+        prenume=x
+    if nume!='' and prenume!='':
+        g.write(prenume)
+        g.write(".")
+        g.write(nume)
+        g.write("@myfmiunibuc.ro, ")
+        g.write(chr(random.randint(65,90)))
+        g.write(chr(random.randint(97,122)))
+        g.write(chr(random.randint(97, 122)))
+        g.write(chr(random.randint(97, 122)))
+        for z in range(4):
+            g.write(chr(random.randint(48,57)))
+        g.write("\n")
+        nume=""
+        prenume=""
+#1 ,am uitat sa scriu comentariu explicativ,dar ma prind eu
+"""
+
+
+"""
+f=open("ddd.txt","r")
+g=open("ccc.txt","w")
+sir=f.read()
+a=b=c=i=0
+nota=1
+ok=1
+while i < len(sir) - 1:
+    if ok==4:
+        ok=1
+    while sir[i].isnumeric():
+        if ok == 1:
+            a = a * 10 + ord(sir[i]) - ord("0")
+        if ok == 2:
+            b = b * 10 + ord(sir[i]) - ord("0")
+        if ok == 3:
+            c = c * 10 + ord(sir[i]) - ord("0")
+        i += 1
+    else:
+        i += 1
+        if ok==1:
+            g.write(str(a))
+            g.write("*")
+        if ok==2:
+            g.write(str(b))
+            g.write("=")
+        if(ok==3):
+            g.write(str(c))
+            if a*b==c:
+                g.write(" Corect")
+                g.write("\n")
+                nota+=1
+            else:
+                g.write(" Gresit ")
+                g.write(str(a*b))
+                g.write("\n")
+            a=0
+            b=0
+            c=0
+        ok+=1
+g.write("Nota obtinuta este : ")
+g.write(str(nota))
+
+#cu ajutorul variabilelor a,b,c am retinut factorii si produsul pentru fiecare inmultire
+#ok-ul l-am folosit pentru a stii in ce variabila sa bag numarul construit
+#1-a,2-b,3-c iar apoi il resetez
+#algoritmul are o forma uratica deoarece l-am facut magalos pe afisare
+#Problema 2
+"""
+
+
+"""
+f=open("ddd.txt","r")
+g=open("ccc.txt","w")
+sir=f.read()
+sir=sir.split()
+i=0
+s=0
+z=0
+p=10
+p1=1
+suma=0
+suma_totala=0
+for i in range(len(sir)-1):
+    if (sir[i].isdecimal() and sir[i+1]=="RON") or (sir[i].find(".") and sir[i+1]=="RON"):
+        ok=0
+        suma=0
+        for z in sir[i]:
+            if z.isdecimal()==False:
+                ok=1
+            if ok==1 and z.isdecimal()==True:
+                suma+=(ord(z)-ord("0"))/p
+                p*=10
+            if ok==0 :
+                suma+=(ord(z)-ord("0"))*p1
+                p1*=10
+        p1=1
+        p=10
+        suma_totala+=suma
+print("Ana a cheltuit suma totala de : ",suma_totala,"RON")
+
+#Problema 3
+#am spart sirul dupa spatii, am verificat ca dupa numar sa se afle cuvantul RON, iar apoi am parcurs numarul 
+#cifra cu cifra, iar cu ajutorul ok-ului am verificat daca suntem inainte sau dupa virgula (punct in problema)
+"""
+
+"""
+s=input("introduceti numerele: ")
+v=[int(a) for a in s.split()]
+v.sort(key=None, reverse=True)
+max1=0
+max2=0
+max1=v[0]
+for x in v:
+    if max1!=x:
+        max2=x
+        print("Cele mai mari 2 valori distincte sunt: ",max1,end=" si ")
+        print(max2)
+        exit()
+print("nu exista 2 valori distincte in vector")
+#Problema 4
+"""
+
+
+"""
+sir=input()
+min=99
+D={}
+ok=0
+for x in sir.split():
+    if x in D:
+        D[x]+=1
+    else:
+        D[x]=0
+for x in D:
+    D[x]+=1
+i=0
+#am creat dictionarul ce are cheia x adica cuvantul si valoarea care creste cand il gaseste pe x
+#la final le am crescut pe toate inca o data deoarece incepeau de la 0
+d = dict() #dictionarul inversat 
+for key, value in D.items():
+    d.setdefault(value, list()).append(key) # face d ul de tip key si lista, la care vom adauga value pe pozitia
+    #cheii si o lista pe pozitia valorii la care am adaugat cheia de la primul dictionar
+    #PRACTIC AM CREAT UN NOU DICTIONAR CE ARE CHEIA INVERSATA CU VALOAREA DE LA PRIMUL
+    if value<min:
+        min=value #jmecherie pentru mai jos
+for key,value in D.items():
+    d.setdefault(value,list()).sort()#am sortat valorile din fiecare lista a d
+for key1,value1 in d.items():
+    if ok==0:
+        ok=1
+        print(value1[0])
+        #am afisat O SINGURA DATA prima valoare din lista cu cea mai mare frecventa
+    if int(key1)==min:   #am afisat tot o singura data prima valoare din lista cu cea mai mica frecventa
+        print(value1[0])
+        exit()
+#Problema 5
+"""
+
+"""
+sir=input()
+d={}
+for x in sir.split():
+    for i in range(len(x)):
+        if x[i] in d:
+            d[x[i]]+=1
+        else:
+            d[x[i]]=1
+print(d)
+#Problema 6
+"""
+
+
+"""
+d1={
+    "ana":3,
+    "maria":9,
+    "anca":6,
+    "oana":2
+}
+d2={
+    "mircea":5,
+    "ionel":6,
+    "oana":4,
+    "ana":9
+}
+d3={}
+d3.update(d1)
+for key,value in d2.items():
+   if key in d1:
+       d2[key]+=d1[key]
+d3.update(d2)
+print(d3)
+#Problema 7
+"""
+
+
+"""
+import re
+sir=input()
+cuv=set()
+ok=0
+for i in range(len(sir)):
+    cuv.update(sir[i])
+f=open("ddd.txt","r")
+sir=f.read()
+sir=re.split(" |,",sir)
+for x in sir:          #stiu ca trebuia pentru orice semn de punctuatie, dar pot sa ii dau resplit pt toate
+    cuv2 = set()
+    for i in range(len(x)):
+        cuv2.update(x[i])
+        if cuv.union(cuv2)==cuv2:
+            print(x)
+            ok=1
+            break
+if ok==0:
+    print("nu exista")
+#Problema 8
+#am folosit 2 seturi, unul pentru cuvant(cuv) si cuv2 pentru sir si am verificat daca uniunea lor este cuv 2
+"""
+
+
+"""
+from collections import defaultdict #DE RETINUT NEAPARAT, E MAI PUNA CA SET DEFAULT
+f=open("ddd.txt","r")
+sir=f.read()
+d=defaultdict(list)
+for x in sir.split():
+    key=x[len(x)-2:len(x)]
+    d[key].append(x)
+print(d)
+#PROBLEMA 9 facuta inteligent
+"""
+
+"""
+from collections import defaultdict
+d={}
+sir=input
+f=open("ddd.txt","r")
+sir=f.read()
+reuniune=set()
+intersectie=set()
+d=defaultdict(set)
+dif=set()
+for x in sir.split():
+    if x.isnumeric()==False:
+        magazin=x
+    else:
+        d[magazin].add(x)
+for value in d.values():
+   reuniune|=value
+print("reuniunea multimilor este: ",reuniune)
+for value in d.values():
+    intersectie=value.difference(reuniune)
+    reuniune=reuniune.difference(value)
+print("intersectia multimilor este: ",intersectie)
+for key,value in d.items():
+    print("produse exclusiviste de la ",key,end=": ")
+    print(d[key].difference(intersectie))
+#PROBLEMA 10
+"""
+
+
+"""
+f=open("ddd.txt","r")
+sir=f.read()
+l=list()
+t=tuple()
+ok=0
+cuv=""
+i=1
+nr=0
+for x in sir.split("+"):
+    if ok==0:
+        i=1
+        ok=1
+    else:
+        i=2 #deoarece primul cuvant are " in fata iar urmatoarele au \n"
+    while x[i]!=":":
+        cuv+=x[i]
+        i+=1
+    else:
+        x=x.replace(cuv,"~")
+        nr=0
+        i=2 #reintializare imediat dupa ~
+        while i < len(x)-1:
+            if x[i]=="~" and (x[i+1]==" " or x[i+1]=="\n"):
+                nr+=1
+            i+=1
+        else:
+            t+=(cuv,nr)
+            l.append(t)
+            t=tuple()
+            cuv=""
+            print(l)
+#PROBLEMA 11 
+#Am construit cuvantul definit in "dictionar", dupa care am inlocuit toate aparitiile sale cu ~
+#iar apoi am numarat de cate ori apare ~ exceptand prima aparitie
+"""
+
+
+"""
+from collections import defaultdict
+t=tuple()
+nr_de_ord=0
+nota=0
+l=list()
+l1=list() #lista pentru dictionar
+note_set=set()
+d=defaultdict(list)
+while nota!=-1:
+    nota=int(input("nota: "))
+    if nota==-1:
+        break
+    else:
+        nr_de_ord+=1
+        student=input("nume student: ")
+        t+=(nota,student,nr_de_ord)
+        l.append(t) #a
+        note_set.add(nota) #b
+        t=(student,nr_de_ord)
+        l1.append(t)
+        d[nota]+=l1
+        l1=list()
+        t=tuple()
+print(l)
+print(note_set)
+print(d)
+#sub a si b
+#c
+#PROBLEMA 12
+"""
+
+
+"""" 
+n=int(input("ordinul matricei este: "))
+n_nemodificat=n #il folosesc la calcularea formulei pentru spirala
+lin=0
+col=0
+lista_poz=list()
+indici=tuple()
+matrice_impara=0
+nr_spirale=-1
+spirala=list()
+#spirala.append(n_nemodificat * lin + col  + 1)
+#aceasta este formula cu care voi afla valoarea neccesara ce trebuie
+#pusa pe o anumita pozitie in matrice
+if n%2==1:
+    lim=n//2+1
+    matrice_impara=1
+else:
+    lim=n//2
+    # am verificat daca ordinul matricei este par/impar
+    #si cate spirale vor fi neccesare sa facem
+while nr_spirale<lim-1: #cat timp se mai pot face spirale
+    if nr_spirale==lim-2 and matrice_impara==1:
+        # cand avem matrice de ordin impar,vom intra doar in
+        #acest while, deoarece ultima spirala va fi doar elementul din mijloc
+        nr_spirale += 1
+        lin = nr_spirale
+        col = nr_spirale
+        indici=(lin,col)
+        lista_poz.append((indici))
+        spirala.append(n_nemodificat * lin + col  + 1)
+        break
+    nr_spirale+=1
+    n-=1
+    #n-ul trebuie sa scada, deoarece cu fiecare spirala, dimensiunea matricei se micsoareaza
+    lin=nr_spirale
+    col=nr_spirale
+    while col<n:
+        indici=(lin,col)
+        lista_poz.append((indici))
+        spirala.append(n_nemodificat * lin + col  + 1)
+        col+=1
+    while lin<n:
+        indici=(lin,col)
+        lista_poz.append((indici))
+        spirala.append(n_nemodificat * lin + col + 1)
+        lin+=1
+    while col>nr_spirale:
+        indici=(lin,col)
+        lista_poz.append((indici))
+        spirala.append(n_nemodificat * lin + col + 1)
+        col -= 1
+    while lin>nr_spirale:
+        indici=(lin,col)
+        lista_poz.append((indici))
+        spirala.append(n_nemodificat * lin + col  + 1)
+        lin-= 1
+#cele patru while-uri reprezinta parcurgerea "spiralata" a matricei
+#in fiecare am adaugat tuple-ul la lista pentru a sti drumul parcurs
+#iar cu formula am adaugat valoarea asociata pozitiei in spirala
+print("lista de pozitii este :",lista_poz)
+print("Spirala este: ",spirala)
+#PROBLEMA 13
+"""
+
+
+"""
+from collections import defaultdict
+import  re
+orasul_cautat=input("orasul din care vrem sa vedem persoanle") #ultima parte din cerinta
+copie_pers={} #o explic mai jos
+pers={} #dictionarul de persoane
+persoane=list() # #pentru prima parte din cerinta (lista de persoane)
+f=open("ddd.txt","r")
+sir=f.read().splitlines() #nu imi mai ia \n asa
+i=0
+ok=0
+adresa={}
+copie_adresa={} # pentru a evita conflictul de id
+nr_pers=0 # aceasta reprezinta cheia pentru d_orase
+d_orase=defaultdict(list) #folosit pentru a avea toate persoanele din acelasi oras
+for x in sir:
+    pers = {} #resetam dictionarul de persoane
+    x = re.split(":|{|}|,| ", x) #split dupa orice caracter gasit ce nu e litera
+    i=0 #contor pentru a parcurge datele fiecarei persoane in parte
+    ok=0 #verifica daca persoane este din orasul cautat
+    date_din_adresa = 0 #verific daca am parcurs fiecare camp al adresei
+    while i<len(x):
+        if x[i]=='nume':
+            pers.update(nume=x[i+1])
+        if x[i]=="prenume":
+            pers.update(prenume=x[i+1])
+        if x[i]=="adresa": #am creat campurile din dictionarul pers
+            while date_din_adresa<3: #avem 3 campuri implicit
+                i+=1                 #mai jos creeam dictionarul adresa
+                if x[i]=="oras":
+                    adresa.update(oras=x[i+1])
+                    if x[i+1]==orasul_cautat: #verific daca orasul este cel cautat
+                        ok=1
+                    date_din_adresa+=1
+                if x[i]=="strada":
+                    adresa.update(strada=x[i+1])
+                    date_din_adresa += 1
+                if x[i]=="numar":
+                    adresa.update(numar=x[i+1])
+                    date_din_adresa += 1
+            copie_adresa=adresa.copy()
+            pers.update(adresa=copie_adresa) #adaug dictionarul adresa la cel cu datele pers
+            persoane.append(pers)      #apoi creez lista de persoane implicita
+            if ok==1: #daca se afla din orasul cautat
+                nr_pers+=1 #creste cheia dict
+                copie_pers=pers.copy() #folosim copie pentru a evita conflictul de id
+                d_orase[nr_pers].append(copie_pers) #si creeam o lista cu datele despre persoanele din acelasi oras
+                ok=0
+        i+=1
+print(persoane)
+print("persoane din orasul cautat", d_orase)
+#PROBLEMA 15
+"""
+
+
+"""
+from collections import deque #n-am folosit-o,doar o tin sa ma flexez cu ea
+from collections import defaultdict
+import re
+
+f=open("ddd.txt","r")
+sir=f.read().splitlines()
+nr_muchii=0
+nr_noduri=0
+i=0
+s=0
+f=0
+ok=0
+lista_muchii=list()
+xi_yi=tuple()
+d=defaultdict(list)
+for i in range(len(sir)): # in acest for am aranjat fiecare chestie citita din fisier in variabila corespunzatoare
+    if i==0:
+        tip_graf=sir[i]
+    if i==1:
+        nr_noduri=sir[i]
+    if i==2:
+        nr_muchii=sir[i]
+    if i==3:
+        sir[i]=re.split(",| ",sir[i])
+        cp=sir[i]
+        j=0
+        while j<len(cp):
+            if cp[j]!="":
+               xi_yi=(int(cp[j]),int(cp[j+1]))
+               lista_muchii.append(xi_yi)
+            j+=3
+    if i==4:
+        for x in sir[i].split():
+            if s==0:
+                s=x
+            else:
+                f=x
+print(lista_muchii)#sub a
+
+
+for xi,yi in lista_muchii:
+    if tip_graf=="orientat":
+        d[xi].append(yi)
+    else:
+        d[xi].append(yi)
+        d[yi].append(xi)
+print(sorted(d.items())) #sub b
+
+
+M=[]
+list_aux=list()
+for key,values in sorted(d.items()):
+    for x in range(1,(int(nr_noduri)+1)):
+        try:
+            if d[key].index(x)!=ValueError:
+                list_aux.append(1)
+        except ValueError:
+            list_aux.append(0)
+    M.append(list_aux)
+    list_aux = list()
+print(M) #sub c
+
+
+BF=[]
+st=dr=0
+BF.append((int(s),-1))
+while st<=dr:
+    tata=BF[st][0]
+    for fiul in d[tata]:
+        if fiul not in (nod for (nod,parinte) in BF):
+            BF.append((fiul,tata))
+            dr+=1
+    st+=1
+for fiul in range(len(BF)):
+    print(BF[fiul][0],end=" ") # sub d
+
+
+print(BF)
+print()
+DF=[]
+vizitat=[]
+DF.append(int(s))
+vizitat.append(int(s))
+while DF!=[]:
+    tata=DF[-1]
+    for fiul in d[tata]:
+        if fiul not in vizitat:
+            break
+        else:
+            if DF==[]:
+                ok=1
+                break
+            DF.pop(-1)
+    if ok==1:
+        break
+    DF.append(fiul)
+    vizitat.append(fiul)
+print(*vizitat, end=" ") # sub e ( ceva nu e bine la asta, urmeaza sa l modific curand
+
+
+drum_min=1
+lista_de_afis=[]
+print()
+tata=BF[len(BF)-1][0]
+lista_de_afis.append(tata)
+fiul=BF[len(BF)-1][1]
+while True:
+    if tata!=int(s) and fiul!=int(s):
+        drum_min+=1
+        tata=fiul
+        lista_de_afis.append(tata)
+        for tata1,fiul1 in BF:
+            if tata1==tata:
+                fiul=fiul1
+                break
+    else:
+        break
+lista_de_afis.append(s)
+lista_de_afis.__reversed__()
+print(*lista_de_afis) # sub f
+#PROBLEMA 14
+"""
+
