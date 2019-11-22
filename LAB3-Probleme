@@ -591,3 +591,12 @@ print(*lista_de_afis) # sub f
 #PROBLEMA 14
 """
 
+
+""" 
+cum trebuie citit din fisier la problema 14:
+neorientat
+5
+6
+1,2, 1,4, 2,3, 3,4 ,4,5
+2  5
+"""
