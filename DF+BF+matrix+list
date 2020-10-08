@@ -1,0 +1,74 @@
+from collections import deque
+
+
+def matrice_adiacenta(orientat=0, nume_fisier="graf.txt"):
+    n = 0
+    a = []
+    with open("graf.txt") as fisier:
+        linie = fisier.readline()
+        n, m = [int(z) for z in linie.split()]
+        a = [[0 for i in range(n)] for j in range(n)]
+        for linie in fisier:
+            x, y = [int(z) for z in linie.split()]
+            x -= 1
+            y -= 1
+            if not orientat:
+                a[x][y] = 1
+                a[y][x] = 1
+            else:
+                a[x][y] = 1
+    fisier.close()
+    return a
+
+
+def lista_adiacenta(orientat=0, nume_fisier="graf.txt"):
+    n = 0
+    a = []
+    with open("graf.txt") as fisier:
+        linie = fisier.readline()
+        n, m = [int(z) for z in linie.split()]
+        a = [[] for i in range(n + 1)]
+        for linie in fisier:
+            x, y = [int(z) for z in linie.split()]
+            a[x].append(y)
+            if not orientat:
+                a[y].append(x)
+    return a
+
+
+def bfs(cur, viz, muchii=lista_adiacenta(0)):
+    if cur[0] not in viz:
+        viz.append(cur[0])
+
+    for x in muchii[cur[0]]:
+        if x not in viz:
+            cur.append(x)
+
+    cur.popleft()
+    if (len(cur)):
+        start = cur[0]
+    if (len(cur) == 0):
+        return 0
+    bfs(cur, viz, muchii)
+    return viz
+
+
+viz = deque()
+cur = deque()
+cur.append(1)
+
+
+# print(bfs(cur,viz))
+
+def dfs(cur, viz, muchii=lista_adiacenta(0)):
+    if cur[len(cur)-1] not in viz:
+        viz.append(cur[len(cur)-1])
+
+    for x in muchii[cur[len(cur)-1]]:
+        if x not in viz:
+            cur.append(x)
+            dfs(cur,viz)
+    return viz
+
+
+print(dfs(cur, viz))
