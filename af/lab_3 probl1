@@ -1,0 +1,165 @@
+from collections import deque
+
+#========================================A========================================================
+
+def matrice_adiacenta(orientat=0, nume_fisier="graf.txt"):
+    n = 0
+    a = []
+    with open("graf.txt") as fisier:
+        linie = fisier.readline()
+        n, m = [int(z) for z in linie.split()]
+        a = [[0 for i in range(n)] for j in range(n)]
+        for linie in fisier:
+            x, y = [int(z) for z in linie.split()]
+            x -= 1
+            y -= 1
+            if not orientat:
+                a[x][y] = 1
+                a[y][x] = 1
+            else:
+                a[x][y] = 1
+    fisier.close()
+    return a
+
+def afisare_matrice_adiacenta():
+    matrice=matrice_adiacenta(1) #0 neorintat 1 orinetat
+    for x in matrice:
+        print (x)
+
+#afisare_matrice_adiacenta()
+def lista_adiacenta(orientat=0, nume_fisier="graf.txt"):
+    n = 0
+    a = []
+    with open("graf.txt") as fisier:
+        linie = fisier.readline()
+        n, m = [int(z) for z in linie.split()]
+        a = [[] for i in range(n + 1)]
+        for linie in fisier:
+            x, y = [int(z) for z in linie.split()]
+            a[x].append(y)
+            if not orientat:
+                a[y].append(x)
+    return a
+
+def afisare_lista_adiacenta():
+    lista_adiac=lista_adiacenta(0)
+    for i in range(len(lista_adiac)):
+        print(i,": ",lista_adiac[i])
+
+#afisare_lista_adiacenta()
+
+def matrice_to_lista(matrice):
+    lista_adiac=[[] for i in range(len(matrice))]
+    indice=0
+    for i in matrice:
+        indice2=0
+        for j in i:
+            indice2+=1
+            if j==1:
+                lista_adiac[indice].append(indice2)
+        indice+=1
+    return lista_adiac
+
+def lista_to_matrice(lista):
+    lista=lista_adiacenta(0)
+    matrice=[[0 for i in range(len(lista)-1)] for j in range(len(lista)-1)]
+    indice=-1
+    for i in lista:
+        indice+=1
+        for j in i:
+            matrice[indice-1][j-1]=1
+    return matrice
+
+#print(lista_to_matrice(lista_adiacenta(0)))
+#print(matrice_to_lista(matrice_adiacenta(0)))
+
+#===================================================B======================
+#favut cu un singur punct de control, afiseaza distanta minima de l
+# a punctul de start la toate muchiile grafului
+
+
+s=int(input("introduceti nod de start:"))
+np=int(input(" introduceti puncte control:"))
+puncte_control=[]
+print("Puncte control:")
+for i in range (np):
+    p=int(input())
+    puncte_control.append(p)
+
+
+def bfs(cur, viz, muchii=lista_adiacenta(1)):
+
+    if cur[0][0] not in [a_tuple[0] for a_tuple in viz]:
+        viz.append(cur[0])
+    for x in muchii[cur[0][0]]:
+        if x not in [a_tuple[0] for a_tuple in viz]:
+            cur.append((x,cur[0][1]+1))
+
+    cur.popleft()
+    if (len(cur)):
+        start = cur[0]
+    if (len(cur) == 0):
+        return 0
+
+    bfs(cur, viz, muchii)
+    return viz
+
+
+viz = deque(tuple())
+cur = deque(tuple())
+cur.append((s,0))
+#astea 3 sunt pt bfs
+"""
+viz = deque()
+cur = deque()
+cur.append(s)
+aste pt dfs
+"""
+
+def dfs(cur, viz, muchii=lista_adiacenta(0)):
+    if cur[len(cur)-1] not in viz:
+        viz.append(cur[len(cur)-1])
+
+    for x in muchii[cur[len(cur)-1]]:
+        if x not in viz:
+            cur.append(x)
+            dfs(cur,viz)
+    return viz
+
+def afiseaza_drum(drum):
+    print(drum)
+
+ok=0
+graf=bfs(cur, viz)
+drum = deque([1])
+lista_adiac = lista_adiacenta(1)
+def aflare_drum (curent,j=1):
+    k=3
+    cautat=8
+    for i in graf:
+        if i[1]!=j:
+            continue
+        #if j+1==k:
+        if i[1]==j and i[0] in lista_adiac[drum[len(drum)-1]]:
+            j+=1
+            drum.append(i[0])
+            if j<=k:
+                aflare_drum(drum[len(drum)-1],j)
+                j-=1
+            if j==k+1 and i[0]!=cautat:
+                j-=1
+                drum.pop()
+                continue
+            if j==k+1 and i[0]==cautat:
+                afiseaza_drum(drum)
+                break
+    else:
+        drum.pop()
+        j-=1
+
+print(aflare_drum(1,1))
+#print(dfs(cur, viz))
+#=================================================B merge pe graf orientat si neorientat ===================================
+
+
+
