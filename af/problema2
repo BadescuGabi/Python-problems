@@ -1,0 +1,44 @@
+from math import fabs
+from math import inf
+
+with open("graf.txt") as fisier:
+    n, m = fisier.readline().split()
+    n = int(n)
+    m = int(m)
+    matrice = []
+    for i in range(n):
+        linie = map(int, fisier.readline().split())
+        matrice.append(list(linie))
+    a = fisier.readline()
+    indici_pornire = []
+    lista_puncte = []
+    linie = -1
+    while a:
+        linie += 1
+        for i in range(len(a)):
+            if matrice[linie][i] == 1:
+                lista_puncte.append((linie+1, i+1))
+        i1, i2 = map(int, a.split())
+        indici_pornire.append((i1, i2))
+        a = fisier.readline()
+
+
+    # print(lista_puncte)
+    # print(matrice)
+
+    def cautare(matrice, punct):
+        max = inf
+
+        for i in lista_puncte:
+            if fabs(punct[0] - fabs(i[0])) + fabs(punct[1] - fabs(i[1])) < max:
+                max = fabs(punct[0] - fabs(i[0])) + fabs(punct[1] - fabs(i[1]))
+                coord_min=i
+            if fabs(punct[0] - fabs(i[0])) + fabs(punct[1] - fabs(i[1]))==1:
+                print("1: ",i)
+                return
+        print(int(max)," ",coord_min)
+
+for j in indici_pornire:
+    cautare(matrice,j)
+    
+    #Problema 2 facuta cu diferente intre tupluri
