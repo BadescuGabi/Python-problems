@@ -1,0 +1,59 @@
+from _collections import deque
+
+with open("graf.txt") as fisier:
+    n, m = fisier.readline().split()
+    n = int(n)
+    m = int(m)
+    matrice = []
+    rom = 0
+    jul = 0
+    indice = -1
+    for i in range(n):
+        indice += 1
+        linie = list(fisier.readline())
+        for j in range(len(linie) - 1):
+            if linie[j] == "R":
+                rom = (indice, j)
+            if linie[j] == "J":
+                jul = (indice, j)
+        linie.pop()
+        matrice.append(linie)
+print(matrice)
+di = [0, 1, -1, 0, 1, -1, 1, -1]
+dj = [1, 0, 0, -1, 1, -1, -1, 1]
+
+
+def lee():
+    i, j = 0,0
+    i_urm, j_urm = 0,0
+    drum = deque()
+    nivel=0
+    drum.append(rom)
+    traseu=[]
+    ok=1
+    while drum != []:
+        if ok:
+            nivel +=1
+        ok=0
+        i = drum[0][0]
+        j = drum[0][1]
+        a=drum.popleft()
+        for k in range(8):
+            i_urm = i + di[k]
+            j_urm = j + dj[k]
+            if i_urm in range(n) and j_urm in range(n) and matrice[i_urm][j_urm]==" ":
+                drum.append((i_urm,j_urm,nivel))
+                traseu.append((i_urm, j_urm, nivel))
+                ok=1
+                matrice[i_urm][j_urm]="X"
+            if  i_urm in range(n) and j_urm in range(n) and matrice[i_urm][j_urm]=="J":
+                rez=traseu[len(traseu)//2-1]
+                print(rez[0]+1,rez[1]+1,rez[2])
+                return 
+        if ok==0:
+            for x in traseu:
+                if a==x:
+                    traseu.remove(x)
+lee()
+
+#Problema 3 romeo si julieta
