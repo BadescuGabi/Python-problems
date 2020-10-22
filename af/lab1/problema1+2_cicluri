@@ -69,3 +69,4 @@ dfs(cur,viz)
 5 6
 6 7
 3 7"""
+#pentru problema 2 matrice=lista adiacenta din dfs pui 1 in loc de 0 (graful este orientat adica)
