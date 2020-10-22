@@ -1,0 +1,75 @@
+from _collections import deque
+
+with open("graf.txt") as fisier:
+    matrice = []
+    n, s, f = [int(z) for z in fisier.readline().split()]
+    for i in range(n):
+        linie = list(map(int, fisier.readline().split()))
+        matrice.append(linie)
+print(matrice)
+
+
+def matrice_to_lista(matrice):
+    lista_adiac = [[] for i in range(len(matrice))]
+    indice = 0
+    for i in matrice:
+        indice2 = 0
+        for j in i:
+            indice2 += 1
+            if j == 1:
+                lista_adiac[indice].append(indice2)
+        indice += 1
+    return lista_adiac
+
+
+lung_lant = 0
+
+
+def bfs(cur, viz, solutie, muchii=matrice_to_lista(matrice)):
+    ok = 0
+    global lung_lant
+    if cur[0] not in [a_tuple for a_tuple in viz]:
+        viz.append(cur[0])
+    for x in muchii[cur[0][0] - 1]:
+        if x not in [a_tuple[0] for a_tuple in viz]:
+            cur.append((x, cur[0][1] + 1))
+            viz.append((x, cur[0][1] + 1))
+            solutie.append([*solutie[0], x])
+        elif x == f:
+            solutie.append([*solutie[0], x])
+    else:
+        ok = 1
+        de_sters = []
+        for last in solutie:
+            if last != int:
+                if last[len(last) - 1] == cur[0][0]:
+                    de_sters.append(last)
+                    if len(last) == lung_lant and lung_lant != 0 and last[len(last) - 1] == cur[0][0] == f:
+                        print(last)
+        while de_sters:
+            solutie.remove(de_sters[len(de_sters) - 1])
+            de_sters.pop()
+    if ok == 0:
+        solutie.popleft()
+    cur.popleft()
+    # start = cur[0][0]
+    if (len(cur) == 0):
+        return 0
+    if solutie[0][len(solutie[0]) - 1] == f and lung_lant == 0:
+        lung_lant = len(solutie[0])
+        print(lung_lant)
+    elif solutie[0][len(solutie[0]) - 1] == f and cur[0][1] == lung_lant:
+        print(solutie[0])
+    bfs(cur, viz, solutie, muchii)
+
+
+viz = deque()
+cur = deque()
+
+cur.append((s, 1))
+solutie = deque()
+solutie.append([s])
+bfs(cur, viz, solutie=solutie)
+# astea 3 sunt pt bfs
+
+#==========================Problema 4=======================
