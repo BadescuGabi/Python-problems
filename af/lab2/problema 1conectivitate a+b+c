@@ -31,13 +31,17 @@ cur = deque()
 cur.append([1, 1])
 nivel = 0
 rezolvat = 0
-
+subretea=[[]for i in range(n+1)]
+print(subretea)
 
 def dfs(cur, viz, nivel=1, muchii=lista_adiacenta(0)):
+    global subretea
     if cur[len(cur) - 1][0] not in [viz1[0] for viz1 in viz]:
         viz.append(cur[len(cur) - 1])
-
+    for var in viz:
+        subretea[var[1]].append(var[0])
     for x in muchii[cur[len(cur) - 1][0]]:
+
         if x not in [z[0] for z in viz]:
             cur.append([x, nivel + 1])
             dfs(cur, viz, nivel + 1)
@@ -83,6 +87,12 @@ solutie=[]
 print(lista_nivele)
 print(muchii_critice(viz1,lista_nivele, lista_nivele[0]))
 
+#1c:
+max=[]
+for i in range(n+1):
+    if len(set(subretea[i]))>len(max):
+        max=set(subretea[i])
+print(max)
 """
 10 13
 1 5
