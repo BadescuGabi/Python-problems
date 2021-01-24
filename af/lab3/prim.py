@@ -9,8 +9,8 @@ def citire(nume_fisier="graf.txt"):
         la = [[] for i in range(n + 1)]
         for linie in f:
             x, y, c = (int(z) for z in linie.split())
-            la[x].append((c,y, x))
-            la[y].append((c, x,y))
+            la[x].append((c,x, y))
+            la[y].append((c, y,x))
     return la, n
 
 
@@ -41,23 +41,43 @@ def Reuneste(u, v):
             h[rv] = h[rv] + 1
 
 
-def parc(graph, cur, nr_muchii=0):
+def parc(graph, cur, nr_muchii=0,ok=0):
     global cost
-    muchii_disp.extend(graph[cur])
+
+    if  ok==0:
+        muchii_disp.extend(graph[cur])
+        ok=1
     heapify(muchii_disp)
+    cur=muchii_disp[0][1]
     element_to_be_removed = [i for i in graph[muchii_disp[0][1]] if cur==i[1]]
     #print(graph[muchii_disp[0][1]])
     #print(element_to_be_removed)
+    element_to_be_removed.sort(key=lambda x:x[0])
     graph[muchii_disp[0][1]].remove(element_to_be_removed[0])
-    for i in muchii_disp:
-        if Reprez(i[1]) != Reprez(cur):
-            Reuneste(muchii_disp[0][1], cur)
-            arbore.append(i)
-            cost += i[0]
+    a=(muchii_disp[0][0],muchii_disp[0][2],muchii_disp[0][1])
+    graph[muchii_disp[0][2]].remove(a)
+    i=0
+    while muchii_disp:
+        if Reprez(muchii_disp[i][2]) != Reprez(cur):
+            Reuneste(muchii_disp[0][2], cur)
+            arbore.append(muchii_disp[i])
+            muchii_disp.extend(graph[arbore[len(arbore)-1][2]])
+            a = muchii_disp[0][2]
+            cost += muchii_disp[0][0]
+            muchii_disp.remove(muchii_disp[0])
+            heapify(muchii_disp)
+
             nr_muchii += 1
             if nr_muchii == citire()[1]-1:
                 break
-            parc(graph,heappop(muchii_disp)[1],nr_muchii)
+
+            parc(graph,a,nr_muchii,ok)
+            break
+        else:
+            muchii_disp.remove(muchii_disp[i])
+
+
+
 
 
     return (arbore,cost)
